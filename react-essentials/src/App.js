@@ -58,7 +58,7 @@ const Footer =(props)=>{
       <button onClick= {()=>setValue("I have changed value!")}>Change it!</button>
       <button onClick= {()=>setValue2("I have changed value2!!")}>Change it!!</button>
       <br/>
-      <input type="checkbox" value={value3} onChange={setValue3}></input>
+      <input id="checkit" type="checkbox" value={value3} onChange={setValue3}></input>
       <br/>
       <p>{ value3 ? "not checked!": "checked"}</p>
     </footer>
@@ -112,12 +112,12 @@ function App() {
   return (
     <div className="App">
       <Header name="Phuong"/>
-      <Body myArrTest={myArrObj}/>
-     
+      <Body myArrTest={myArrObj}/>        
       <Footer2 username="minhphuong1994"/>
       <Footer/>
     </div> 
   );
 }
 
-export default App;
+
+export default App
