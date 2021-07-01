@@ -1,5 +1,6 @@
-import './App.css';
-import React, {useState, useEffect, useReducer} from 'react';
+import './App.css'
+import React, {useState, useEffect, useReducer} from 'react'
+import { Routes, Route, Link, useLocation, Outlet } from 'react-router-dom'
 
 //My Github api users info: https://api.github.com/users/minhphuong1994
 
@@ -108,15 +109,67 @@ const Footer2 = ({username})=>{
 
 
 
+const ErrorPage =()=>{
+  let location = useLocation()
+  return (   
+    <div>
+      <nav>
+      <Link to="*">Nested Wildcard Error Page</Link>     
+      </nav>
+      <h1>Route {location.pathname} doesn't exist!</h1>
+      <Outlet/>
+    </div>
+  )
+}
+
+const ErrorPageNested =()=>{
+  let location = useLocation()
+  return (   
+    <div>
+      <h1>Again, route {location.pathname} doesn't exist!</h1>
+    </div>
+  )
+}
+
+
+
+const Group1 = ()=>{
+  return <React.Fragment>
+    <nav>
+      <Link to="another">Another Page</Link> <br/>
+      <Link to="error">Error Page</Link>
+    </nav>
+    <Header name="Phuong"/>
+    <Body myArrTest={myArrObj}/>        
+    <Footer2 username="minhphuong1994"/>
+  </React.Fragment>
+}
+
+const Group2 = ()=>{
+  return <React.Fragment>
+    <nav>
+      <Link to="/">Previous Page</Link>
+    </nav>
+    <Header name="Phuong"/>
+    <Body myArrTest={myArrObj}/>        
+    <Footer/>
+  </React.Fragment>
+}
+
+
+
 function App() {
   return (
     <div className="App">
-      <Header name="Phuong"/>
-      <Body myArrTest={myArrObj}/>        
-      <Footer2 username="minhphuong1994"/>
-      <Footer/>
+      <Routes>
+        <Route path="/" element={<Group1/>}/>
+        <Route path="/another" element={<Group2/>}/>   
+        <Route path="/error" element={<ErrorPage/>}>
+          <Route path="*" element={<ErrorPageNested/>}/>
+        </Route>     
+      </Routes> 
     </div> 
-  );
+  )
 }
 
 
